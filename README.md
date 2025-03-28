@@ -1,4 +1,3 @@
 # digit-recogniser
-Classifying digits from MNIST dataset using random forest, visualizing using t-SNE components.
-
-Please refer to .ipynb file for training results and plots.
+* Built CNN using PyTorch, with 4 convolution and 2 max pooling layers
+* Achieved test accuracy of 0.9958 (top 5%) on Kaggle
