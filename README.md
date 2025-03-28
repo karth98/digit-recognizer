@@ -6,6 +6,6 @@
 * Train confusion matrix:
   
 ![image](https://github.com/user-attachments/assets/7527c69b-9d9a-432a-bc3f-1fef17015699)
-* Top 10 errors:
+* Error analysis (mostly ambiguous):
 
 ![image](https://github.com/user-attachments/assets/f50a5ad0-6d9d-4fdf-a9e5-0e5634b91b79)
