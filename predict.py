@@ -35,7 +35,6 @@ def generate_submission_csv(model, dataloader):
     df.to_csv(output_path, index=False)
     print(f"Saved submission to {output_path}")
 
-
 def main():
     model = load("results/model.safetensors")
     test_X = load_data(test_only=True)

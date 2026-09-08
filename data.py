@@ -64,7 +64,7 @@ def random_mask(img_array, x=5):
     return img_array
 
 def add_gaussian_noise(img, mean=0.1, std=0.2):
-    noise = torch.rand_like(img) * std + mean
+    noise = torch.randn_like(img) * std + mean
     noisy_img = img + noise
     return torch.clamp(noisy_img, 0.0, 1.0)
 
@@ -78,7 +78,8 @@ def random_affine_matrix(N, max_rot_deg=20,
     sin = torch.sin(angles)
 
     # Scale
-    scale = torch.rand(N, device=device) * (scale_range[1] - scale_range[0]) + scale_range[0]
+    scale_x = torch.rand(N, device=device) * (scale_range[1] - scale_range[0]) + scale_range[0]
+    scale_y = torch.rand(N, device=device) * (scale_range[1] - scale_range[0]) + scale_range[0]
 
     # Translation (normalized coords)
     tx = (torch.rand(N, device=device) * 2 - 1) * translate_frac[0]
@@ -86,10 +87,10 @@ def random_affine_matrix(N, max_rot_deg=20,
 
     # Affine matrices (N, 2, 3)
     theta = torch.zeros(N, 2, 3, device=device)
-    theta[:, 0, 0] = scale * cos
-    theta[:, 0, 1] = -scale * sin
-    theta[:, 1, 0] = scale * sin
-    theta[:, 1, 1] = scale * cos
+    theta[:, 0, 0] = scale_x * cos
+    theta[:, 0, 1] = -scale_y * sin
+    theta[:, 1, 0] = scale_x * sin
+    theta[:, 1, 1] = scale_y * cos
     theta[:, 0, 2] = tx
     theta[:, 1, 2] = ty
 

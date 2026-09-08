@@ -43,7 +43,7 @@ class CNN(nn.Module):
         # Fully connected layers
         self.flatten = nn.Flatten()
         self.fc1 = nn.Linear(64 * 7 * 7, 256)  # Adjust the dimensions based on the input size
-        self.dropout3 = nn.Dropout(p=0.5)
+        self.dropout3 = nn.Dropout(p=0.25)
         self.fc2 = nn.Linear(256, 10)
 
         self._initialize_weights()
@@ -51,18 +51,18 @@ class CNN(nn.Module):
     def forward(self, x):
         # if self.training:
         #     x = augment_(x.clone())
-        x = F.relu(self.bn1(self.conv1(x)))
-        x = F.relu(self.bn2(self.conv2(x)))
+        x = F.silu(self.bn1(self.conv1(x)))
+        x = F.silu(self.bn2(self.conv2(x)))
         x = self.pool1(x)
         x = self.dropout1(x)
 
-        x = F.relu(self.bn3(self.conv3(x)))
-        x = F.relu(self.bn4(self.conv4(x)))
+        x = F.silu(self.bn3(self.conv3(x)))
+        x = F.silu(self.bn4(self.conv4(x)))
         x = self.pool2(x)
         x = self.dropout2(x)
 
         x = self.flatten(x)
-        x = F.relu(self.fc1(x))
+        x = F.silu(self.fc1(x))
         x = self.dropout3(x)
         x = self.fc2(x)
         return x
